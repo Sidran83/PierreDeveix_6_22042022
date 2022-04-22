@@ -1,8 +1,9 @@
 const express = require('express');
 
-const app = express();
 
 const mongoose = require('mongoose');
+
+const userRoutes = require('./routes/user');
 
 mongoose.connect('mongodb+srv://pierredeveix:panoramata@sidran83.5hbgs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -10,6 +11,7 @@ mongoose.connect('mongodb+srv://pierredeveix:panoramata@sidran83.5hbgs.mongodb.n
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -19,8 +21,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res) => {
-  res.json({ message: 'coucou'});
-});
+app.use('api/auth', userRoutes);
 
 module.exports = app;
