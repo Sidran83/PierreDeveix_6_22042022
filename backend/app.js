@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
